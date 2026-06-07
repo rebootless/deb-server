@@ -1,4 +1,4 @@
-# 🖥️ deb-server — Home Lab
+# deb-server — Home Lab
 
 ![Debian](https://img.shields.io/badge/Debian-13_Trixie-A81D33?style=flat-square&logo=debian&logoColor=white)
 ![Kernel](https://img.shields.io/badge/Kernel-6.12.74_amd64-333?style=flat-square&logo=linux&logoColor=white)
@@ -90,7 +90,7 @@ sdb (20 GB)        /var      (Docker, logs, packages — 19% used)
 | **Avahi**       | —          | ✅ Active | mDNS / `.local` name resolution    |
 | **Cron**        | —          | ✅ Active | Scheduled tasks                    |
 
-## 🐳 Docker Stack — Monitoring
+## Docker Stack — Monitoring
 
 Located at `/opt/grafana-stack/`. Managed with Docker Compose.
 
