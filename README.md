@@ -22,8 +22,6 @@ Personal home server running as a VirtualBox VM on a local machine. Used for sel
 | **Local IP**   | `192.168.0.101`                   |
 | **Domain**     | `deb-server.local`                |
 
----
-
 ## Hardware (VM specs)
 
 | Component  | Details                               |
@@ -45,8 +43,6 @@ sda (20 GB)
 
 sdb (20 GB)        /var      (Docker, logs, packages — 19% used)
 ```
-
----
 
 ## Architecture
 
