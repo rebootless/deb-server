@@ -1,0 +1,8 @@
+# Secrets
+.env
+
+# Grafana data
+docker/grafana-stack/grafana/data/
+
+# Prometheus data
+docker/grafana-stack/prometheus/data/
