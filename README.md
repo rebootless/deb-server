@@ -174,21 +174,17 @@ Collects a full system snapshot (hardware, services, Docker, Nginx, firewall, lo
 
 ## Screenshots
 
-### Node Exporter Full — Metrics
+### Grafana
 
-![Node Exporter Full — Metrics](screenshots/grafana-metrics.png)
+| Node Exporter Full — Metrics         | Linux Server — Dashboard               |
+|--------------------------------------|----------------------------------------|
+| ![](screenshots/grafana-metrics.png) | ![](screenshots/grafana-dashboard.png) |
 
-### Linux Server — Dashboard
+### Portainer
 
-![Linux Server Dashboard — Dashboard](screenshots/grafana-dashboard.png)
-
-### Portainer — Environments
-
-![Portainer — Environments](screenshots/portainer-environments.png)
-
-### Portainer — Containers
-
-![Portainer — Containers](screenshots/portainer-containers.png)
+| Environments                                | Containers                                |
+|---------------------------------------------|-------------------------------------------|
+| ![](screenshots/portainer-environments.png) | ![](screenshots/portainer-containers.png) |
 
 ## Repository Structure
 
