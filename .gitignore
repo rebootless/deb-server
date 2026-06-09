@@ -1,8 +1,13 @@
 # Secrets
 .env
+opt/grafana-stack/secrets/
+opt/portainer-stack/secrets/
 
 # Grafana data
-docker/grafana-stack/grafana/data/
+opt/grafana-stack/grafana/data/
 
 # Prometheus data
-docker/grafana-stack/prometheus/data/
+opt/grafana-stack/prometheus/data/
+
+# Portainer data
+opt/portainer-stack/data/
