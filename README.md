@@ -37,12 +37,13 @@ Personal home server running as a VirtualBox VM on a local machine. Used for sel
 
 ```
 sda (20 GB)
-├── sda1  5.3 GB   /
-├── sda5  2.1 GB   (ext)
-├── sda6  976 MB   [SWAP]
-└── sda7  11.7 GB  /srv
+├── sda1  5.3  GB      /       [primary, bootable]
+└── sda2  14.7 GB              [extended]
+    ├── sda5  2.1  GB  —       [unmounted]
+    ├── sda6  976  MB  [SWAP]  [logical — Linux swap]
+    └── sda7  11.7 GB  /srv    [logical — Linux]
 
-sdb (20 GB)        /var
+sdb (20 GB)            /var
 ```
 
 ## Architecture
