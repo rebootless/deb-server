@@ -221,5 +221,4 @@ deb-server/
 ## Notes
 
 * Secrets (`grafana_admin_password.txt`, `portainer_admin_password.txt`) are stored in `/opt/grafana-stack/secrets/` and `/opt/portainer-stack/secrets/` — **not tracked** in this repo.
-* Grafana credentials: username in `/opt/grafana-stack/.env`, password in `secrets/grafana_admin_password.txt`.
 * `/var` is on a separate disk (`/dev/sdb`) to prevent logs and Docker data from filling the OS partition.
