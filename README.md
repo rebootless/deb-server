@@ -102,12 +102,12 @@ docker compose up -d
 
 ## Nginx
 
-Config: [`nginx/sites-available/deb-server.local`](nginx/sites-available/deb-server.local)
+Config: [`etc/nginx/sites-available/deb-server.local`](etc/nginx/sites-available/deb-server.local)
 
 * Serves PHP and static files from `/var/www/deb-server.local`
-* Proxies `/grafana/` to Grafana container on port 3000
-* Proxies `/portainer/` to Portainer container on port 9000
-* WebSocket support enabled for Grafana live features
+* Proxies `/grafana/` → Grafana on port 3000
+* Proxies `/portainer/` → Portainer on port 9000 (trailing slash strips prefix)
+* WebSocket support enabled for Grafana live features and Portainer
 * `server_tokens off` — version not exposed
 * TLS 1.2 / 1.3 only (when HTTPS is configured)
 
@@ -146,7 +146,7 @@ Installs admin tools (`htop`, `git`, `curl`, etc.), configures sudo, firewalld (
 bash deploy-nginx.sh
 ```
 
-Installs Nginx + PHP 8.4-FPM, creates the virtual host for `deb-server.local`, configures the `/grafana/` reverse proxy block, and sets firewalld rules for HTTP/HTTPS.
+Installs Nginx + PHP 8.4-FPM, creates the virtual host for `deb-server.local`, configures the `/grafana/` and `/portainer/` reverse proxy blocks, and sets firewalld rules for HTTP/HTTPS.
 
 #### 3. Grafana stack — monitoring
 
@@ -154,7 +154,7 @@ Installs Nginx + PHP 8.4-FPM, creates the virtual host for `deb-server.local`, c
 bash deploy-grafana.sh
 ```
 
-Installs Docker, generates `compose.yaml`, Prometheus config, and Grafana provisioning inline. Starts the stack and auto-imports the **Node Exporter Full** dashboard (ID 19937) via the Grafana API.
+Installs Docker, generates `compose.yaml`, `.env`, Prometheus config, and Grafana provisioning inline at `/opt/grafana-stack/`. Starts the stack and auto-imports the **Node Exporter Full** dashboard (ID 19937) via the Grafana API.
 
 #### 4. Portainer stack — Docker management
 
@@ -162,7 +162,7 @@ Installs Docker, generates `compose.yaml`, Prometheus config, and Grafana provis
 bash deploy-portainer.sh
 ```
 
-Installs Docker, generates `compose.yaml` inline, stores the admin password as a Docker secret, starts Portainer CE, and exposes it through Nginx at `/portainer/`.
+Installs Docker, generates `compose.yaml` inline at `/opt/portainer-stack/`, stores the admin password as a Docker secret, starts Portainer CE, and exposes it through Nginx at `/portainer/`.
 
 #### 5. (Optional) Server report
 
@@ -202,25 +202,27 @@ deb-server/
 │   ├── portainer-containers.png
 │   ├── portainer-environments.png
 │   └── deb-server-diagram.png
-├── nginx/
-│   └── sites-available/
-│       └── deb-server.local        # Nginx virtual host config
-└── docker/
+├── etc/
+│   └── nginx/
+│       └── sites-available/
+│           └── deb-server.local        # Nginx virtual host config
+└── opt/
     ├── grafana-stack/
-    │   ├── compose.yaml            # Docker Compose stack
+    │   ├── compose.yaml                # Docker Compose stack
     │   ├── prometheus/
-    │   │   └── prometheus.yml      # Prometheus scrape config
+    │   │   └── prometheus.yml          # Prometheus scrape config
     │   └── grafana/
     │       └── provisioning/
     │           ├── datasources/
-    │           │   └── prometheus.yml
+    │           │   └── prometheus.yml  # Grafana datasource
     │           └── dashboards/
-    │               └── dashboards.yml
+    │               └── dashboards.yml  # Dashboard provider config
     └── portainer-stack/
-        └── compose.yaml            # Docker Compose stack
+        └── compose.yaml                # Docker Compose stack
 ```
 
 ## Notes
 
-* Secrets (Grafana admin password, Portainer admin password, etc.) are stored in `/opt/grafana-stack/secrets/` and `/opt/portainer-stack/secrets/` and are **not** tracked in this repo.
+* Secrets (`grafana_admin_password.txt`, `portainer_admin_password.txt`) are stored in `/opt/grafana-stack/secrets/` and `/opt/portainer-stack/secrets/` — **not tracked** in this repo.
+* Grafana credentials: username in `/opt/grafana-stack/.env`, password in `secrets/grafana_admin_password.txt`.
 * `/var` is on a separate disk (`/dev/sdb`) to prevent logs and Docker data from filling the OS partition.
