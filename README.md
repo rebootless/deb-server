@@ -129,7 +129,7 @@ Open ports:
 
 ## Deployment
 
-This server was set up using scripts from **[VargKernel/shell-toolkit](https://github.com/VargKernel/shell-toolkit)**.
+This server was set up using scripts from **[rebootless/shell-toolkit](https://github.com/rebootless/shell-toolkit)**.
 
 ### Order of execution
 
